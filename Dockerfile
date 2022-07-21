@@ -7,9 +7,11 @@ yum install -y nodejs
 
 #generate build 
 WORKDIR /projects
-ADD . /projects
-RUN npm install && \ 
-npm run build 
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . ./
+RUN npm run build 
 
 FROM roboxes/rhel8 AS Runner
 
